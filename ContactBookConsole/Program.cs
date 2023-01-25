@@ -1,100 +1,40 @@
 ﻿
-bool value = true;
+using ContactBookConsole.Interfaces;
+using ContactBookConsole.Models;
+using ContactBookConsole.Services;
+using Newtonsoft.Json;
+using System;
 
-while (value == true)
+
+var menu = new ContactService
 {
-    Console.WriteLine("\nVälkommen till Adressboken\r\n\r\n" +
-        "1. Skapa en kontakt\r\n\r\n" +
-        "2. Visa alla kontakter\r\n\r\n" +
-        "3. Visa en specifik kontakt\r\n\r\n" +
-        "4. Ta bort en specifik kontakt\r\n\r\n" +
-        "5. Avsluta programmet.\r\n\r\n" +
-        "Välj ett av alternativen ovan: ");
+    FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json"
+};
 
-    int choice;
-    Console.WriteLine("");
-    choice = Convert.ToInt32(Console.ReadLine());
+//var menu = new ContactService();
+
+//menu.FilePath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\content.json";
 
 
-    if (choice == 1)
-    {
-        Console.WriteLine("\nDu valde 1");
-    }
-
-    else if (choice == 2)
-    {
-        Console.WriteLine("\nDu valde 2");
-    }
-
-    else if (choice == 3)
-    {
-        Console.WriteLine("\nDu valde 3");
-    }
-
-    else if (choice == 4)
-    {
-        Console.WriteLine("\nDu valde 4");
-    }
-
-    else if (choice == 5)
-    {
-        Console.WriteLine("\nDu valde 5. Programmet avslutas");
-        value = false;
-    }
-
-    else
-    {
-        Console.WriteLine("Du valde något annat.");
-    }
+while (true)
+{
+	Console.Clear();
+	menu.ShowMenu();
 }
 
 
 
+// ------ Attribute göra --------------------------------------
+
+//Visa en specifik kontakt
+
+//Ta bort en specifik kontakt
 
 
 
 
-
-/*
- * 		public static void Main(string[] args)
-		{
-			string testString;
-			Console.Write("Enter a string - ");
-			testString = Console.ReadLine();
-			Console.WriteLine("You entered '{0}'", testString);
-		}
+/* -----------------------------------------------------------------------------------------------------------------
  
-Huvudmenyn
-
-När du startar programmet ska du komma till någon form av meny som skriver ut följande information på skärmen. 
-Denna information ska komma upp första gången en användare startar programmet och sen efter att den har genomfört 
-ett av alternativen. Så den ska alltså loopas på något sätt:
-
-
-
-Välkommen till Adressboken
-
-1. Skapa en kontakt
-
-2. Visa alla kontakter
-
-3. Visa en specifik kontakt
-
-4. Ta bort en specifik kontakt
-
-Välj ett av alternativen ovan: 
-
-
-
-Skapa en kontakt
-
-När användaren väljer detta alternativ så ska den få upp en tom skärm som det sedan ska listas upp information 
-som man behöver knappa in. Det kan vara information såsom förnamn, efternamn, e-postadress, telefonnummer, 
-gatuadress, postnummer och ort. När användaren har skrivit in all information så ska denna information sparas ner
-i en lista. Denna lista ska sedan sparas ner till en json-fil så att informationen finns kvar även om du stänger 
-av applikationen.
-
-
 
 Visa alla kontakter
 
