@@ -21,9 +21,6 @@ namespace ContactBookConsole.Models
 
         public string City { get ; set ; } = null!;
 
-        public static implicit operator Contact(string v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

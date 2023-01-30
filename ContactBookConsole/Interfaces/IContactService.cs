@@ -11,7 +11,7 @@ namespace ContactBookConsole.Interfaces
         void ShowMenu();
         void AddContactToList();
         void GetAll();
-        IContact Get();
+        void Get();
         void RemoveContactFromList(IContact contact);
     }
 }
