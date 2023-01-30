@@ -120,20 +120,14 @@ namespace ContactBookConsole.Services
 
         }
 
-
-        //public void ShowSearchContact()
-        //{
-
-        //}
         public void Get()
         {
             Console.Clear();
 
-            ////Visa en specifik kontakt
-
-            // Skriv personens förnamn:
+            ////Visa en specifik kontakt. Skriv personens förnamn:
             Console.WriteLine($"Skriv personens förnamn: ");
             var searchFirstName = Console.ReadLine() ?? "";
+            //searchFirstName = searchFirstName.ToLower();
 
             //Letar efter kontakt, med hjälp av förnamn.
             var findContact = contacts.Find(x => x.FirstName.Contains(searchFirstName));
@@ -154,15 +148,19 @@ namespace ContactBookConsole.Services
                 Console.Read();
             }
             else
+            {
+                Console.Clear();
+                Console.WriteLine("Kunde inte hitta kontakten.");
+                Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                Console.Read();
                 ShowMenu();
+            }
+         
         }
 
 
         public void RemoveContactFromList()
         {
-            string y = "";
-            string n = "";
-    
             Console.Clear();
 
             //Ta bort en specifik kontakt. Skriv personens förnamn:
@@ -182,125 +180,38 @@ namespace ContactBookConsole.Services
                 Console.WriteLine("Vill du ta bort kontakten? Tryck y. För att avbryta tryck n");
                 var RemoveChoice = Console.ReadLine();
 
-                if (RemoveChoice != null)
+                switch (RemoveChoice)
                 {
-                    if (RemoveChoice == y)
-                    {
+                    case "y":
+                        // Ta bort kontakt
+                        try
+                        {
+                            contacts.Remove(findContact);
+                            file.Save(FilePath, JsonConvert.SerializeObject(contacts));
+                        }
+                        catch { }
+
                         Console.WriteLine("Kontakten har tagits bort.");
                         Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
                         Console.Read();
                         ShowMenu();
-                    }
+                        break;
 
-                    else if (RemoveChoice == n)
-                    {
+                    case "n":
+                        // Avbryta att ta bort kontakt
                         Console.WriteLine("Ta bort kontakt avbryts.");
                         Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
-                        Console.Clear();
-                        ShowMenu();
-                    }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Du valde något annat.");
-                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
                         Console.Read();
-
+                        Console.Clear();
                         ShowMenu();
-                    }
+                        break;
+ 
+                    default:
+                        Console.Clear() ;
+                        ShowMenu();
+                        break;
                 }
-            
-                Console.WriteLine("tryck på valfri tangent för att komma tillbaka till menyn.");
-                Console.Read();
             }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Kontakten finns inte.");
-                Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
-                Console.Read();
-
-                ShowMenu();
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // Console.WriteLine("Skriv personens förnamn: ");
-            // Contact tempFirstName = Console.ReadLine() ?? "";
-
-
-            // if (tempFirstName != null)
-            // {
-            //            if (contacts.Find(tempFirstName))
-            // {
-            //     Console.WriteLine("Address successfully removed");
-            // }
-            // else
-            // {
-            //     Console.WriteLine("Address for {0} could not be found.", tempFirstName);
-            // }
-
-            // }
-
-            // Console.WriteLine("\nFind: Part where name contains \"seat\": {0}",
-            //parts.Find(x => x.PartName.Contains("seat")));
-
-
-            // if (contacts.Remove(tempFirstName))
-            // {
-            //     Console.WriteLine("Address successfully removed");
-            // }
-            // else
-            // {
-            //     Console.WriteLine("Address for {0} could not be found.", tempFirstName);
-            // }
-
-
-            // ////Fråga efter namn
-            // //Console.Write("Skriv namnet på kontakten du vill få bort: ");
-            // //string tempName = Console.ReadLine() ?? "";
-
-
-            // ////Söker efter namn
-            // //int index = contacts.IndexOf(tempName);
-
-
-            // ////Resultat från sökning
-            // //if (index != -1)
-            // //{
-            // //    Console.WriteLine(String.Format("\n3. Name {0} kommer tas bort index {1}", tempName, index));
-            // //    contacts.RemoveAt(index);
-            // //}
-            // //else
-            // //{
-            // //    Console.WriteLine("Name not found in the given list.");
-            // //}
-
-            // Console.WriteLine("\nTryck på en valfri tangent för att komma tillbaka till huvudmenyn");
-            //Console.Read();
-
         }
     }
-
 }
