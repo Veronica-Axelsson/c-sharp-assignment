@@ -8,36 +8,26 @@ namespace ConsoleAppTest_xUnit
 {
     public class Contact_Tests
     {
-        //private  Contact contacs;
-        //Contact contactPerson;
-
-        //private AddressBook addressBook;
-        //Contact contactPerson2;
-
-        private readonly Contact contactsList = new();
-        readonly Contact contactPerson = new();
+        private readonly AddressBook addressBook;
+        readonly Contact contact;
 
         public Contact_Tests()
         {
             // arange -------------------------------------
-            //addressBook = new AddressBook();
-            //contactPerson2 = new Contact();
-
-            contactsList = new Contact();
-            contactPerson = new Contact();
+            addressBook = new();
+            contact = new();
         }
 
         [Fact]
         public void Should_Add_Contact_To_List()
         {
             // act ----------------------------------------
-            contactsList.AddContactToList.Add(contactPerson);
-            contactsList.AddContactToList.Add(contactPerson);
+            addressBook.ContactList.Add(contact);
+            addressBook.ContactList.Add(contact);
 
-        
 
             // assert -------------------------------------
-            Assert.Equal(2, contactsList.ContactList.Count);
+            Assert.Equal(2, addressBook.ContactList.Count);
         }
     }
 }

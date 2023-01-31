@@ -15,7 +15,7 @@ namespace ConsoleAppTest_MSTest
         public void Should_Add_Contact_To_List()
         {
             // Arrange
-            Contact addressBook= new();
+            AddressBook addressBook= new();
             Contact contact= new();
 
             // Act

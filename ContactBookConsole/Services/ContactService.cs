@@ -161,8 +161,10 @@ namespace ContactBookConsole.Services
             Console.Write("Ta bort en kontakt! ");
             Console.WriteLine($"Skriv personens förnamn: ");
             var searchFirstName = Console.ReadLine() ?? "";
+            string searchFirstNameToLower = searchFirstName.ToLower();
 
             //Letar efter kontakt, med hjälp av förnamn.
+
             var findContact = contactsList.Find(x => x.FirstName.Contains(searchFirstName));
 
             if (findContact != null)
