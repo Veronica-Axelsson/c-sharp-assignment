@@ -14,12 +14,12 @@ using System.Collections.Generic;
 
 namespace ContactBookConsole.Services
 {
-    internal class ContactService /*: IContactService*/
+    internal class ContactService
     {
         private List<Contact> contacts = new();
         private readonly Contact contactPerson = new();  
              
-        private readonly FileService file = new();
+        //private readonly FileService file = new();
 
         public string FilePath { get; set; } = null!;
 
@@ -31,7 +31,7 @@ namespace ContactBookConsole.Services
             //Read from file
             try
             {
-                var persons = JsonConvert.DeserializeObject<List<Contact>>(file.Read(FilePath));
+                var persons = JsonConvert.DeserializeObject<List<Contact>>(FileService.Read(FilePath));
                 if (persons != null)
                 {
                     contacts = persons;
@@ -49,8 +49,7 @@ namespace ContactBookConsole.Services
                     "5. Avsluta programmet.\r\n\r\n" +
                     "Välj ett av alternativen ovan: ");
 
-
-            Console.WriteLine("");
+            //Console.WriteLine("");
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -62,16 +61,13 @@ namespace ContactBookConsole.Services
                 case "5":
                     Console.Clear();
                     Console.WriteLine("\nDu valde 5. Programmet avslutas. Tryck på valfri knapp för att fortsätta.");
-
                     System.Environment.Exit(0);
                     break;
                 default:
                     ShowMenu();
-
-
                     break;
             }
-            file.Save(FilePath, JsonConvert.SerializeObject(contacts));
+            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
         }
 
         public void AddContactToList()
@@ -102,7 +98,7 @@ namespace ContactBookConsole.Services
 
             contacts.Add(contactPerson);
 
-            file.Save(FilePath, JsonConvert.SerializeObject(contacts));
+            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
         }
 
         public void GetAll()
@@ -117,7 +113,6 @@ namespace ContactBookConsole.Services
 
             Console.WriteLine("\nTryck på en valfri tangent för att komma tillbaka till huvudmenyn");
             Console.Read();
-
         }
 
         public void Get()
@@ -158,13 +153,12 @@ namespace ContactBookConsole.Services
          
         }
 
-
         public void RemoveContactFromList()
         {
             Console.Clear();
 
             //Ta bort en specifik kontakt. Skriv personens förnamn:
-            Console.Write("Ta bort en kontakt!");
+            Console.Write("Ta bort en kontakt! ");
             Console.WriteLine($"Skriv personens förnamn: ");
             var searchFirstName = Console.ReadLine() ?? "";
 
@@ -187,7 +181,7 @@ namespace ContactBookConsole.Services
                         try
                         {
                             contacts.Remove(findContact);
-                            file.Save(FilePath, JsonConvert.SerializeObject(contacts));
+                            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
                         }
                         catch { }
 
@@ -207,8 +201,14 @@ namespace ContactBookConsole.Services
                         break;
  
                     default:
-                        Console.Clear() ;
-                        ShowMenu();
+                        
+                   
+                        Console.WriteLine("Kontakten kunde inte hittas.");
+                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+
+             
+                        //Console.Clear() ;
+                        //ShowMenu();
                         break;
                 }
             }

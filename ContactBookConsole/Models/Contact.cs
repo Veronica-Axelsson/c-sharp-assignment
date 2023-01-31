@@ -20,7 +20,5 @@ namespace ContactBookConsole.Models
         public string PostNumber { get ; set ; } = null!;
 
         public string City { get ; set ; } = null!;
-
-      
     }
 }
