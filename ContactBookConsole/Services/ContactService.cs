@@ -16,7 +16,7 @@ namespace ContactBookConsole.Services
 {
     internal class ContactService
     {
-        private List<Contact> contacts = new();
+        private List<Contact> contactsList = new();
         private readonly Contact contactPerson = new();  
              
         //private readonly FileService file = new();
@@ -34,7 +34,7 @@ namespace ContactBookConsole.Services
                 var persons = JsonConvert.DeserializeObject<List<Contact>>(FileService.Read(FilePath));
                 if (persons != null)
                 {
-                    contacts = persons;
+                    contactsList = persons;
                 }
             }
             catch { }
@@ -67,7 +67,7 @@ namespace ContactBookConsole.Services
                     ShowMenu();
                     break;
             }
-            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
+            FileService.Save(FilePath, JsonConvert.SerializeObject(contactsList));
         }
 
         public void AddContactToList()
@@ -96,9 +96,9 @@ namespace ContactBookConsole.Services
             Console.Write("Stad: ");
             contactPerson.City = Console.ReadLine() ?? "";
 
-            contacts.Add(contactPerson);
+            contactsList.Add(contactPerson);
 
-            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
+            FileService.Save(FilePath, JsonConvert.SerializeObject(contactsList));
         }
 
         public void GetAll()
@@ -106,7 +106,7 @@ namespace ContactBookConsole.Services
             Console.Clear();
             Console.WriteLine("\nAlla kontakter: ");
 
-            foreach (Contact x in contacts)
+            foreach (Contact x in contactsList)
             {
                 Console.WriteLine($"Namn: {x.FirstName} {x.LastName}. E-mail: {x.Email}");
             }
@@ -125,7 +125,7 @@ namespace ContactBookConsole.Services
             //searchFirstName = searchFirstName.ToLower();
 
             //Letar efter kontakt, med hjälp av förnamn.
-            var findContact = contacts.Find(x => x.FirstName.Contains(searchFirstName));
+            var findContact = contactsList.Find(x => x.FirstName.Contains(searchFirstName));
 
             if (findContact != null)
             {
@@ -163,7 +163,7 @@ namespace ContactBookConsole.Services
             var searchFirstName = Console.ReadLine() ?? "";
 
             //Letar efter kontakt, med hjälp av förnamn.
-            var findContact = contacts.Find(x => x.FirstName.Contains(searchFirstName));
+            var findContact = contactsList.Find(x => x.FirstName.Contains(searchFirstName));
 
             if (findContact != null)
             {
@@ -180,8 +180,8 @@ namespace ContactBookConsole.Services
                         // Ta bort kontakt
                         try
                         {
-                            contacts.Remove(findContact);
-                            FileService.Save(FilePath, JsonConvert.SerializeObject(contacts));
+                            contactsList.Remove(findContact);
+                            FileService.Save(FilePath, JsonConvert.SerializeObject(contactsList));
                         }
                         catch { }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContactBookConsole.Models
 {
-    internal class Contact : IContact
+    public class Contact : IContact
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get ; set ; } = null!;
@@ -20,5 +20,13 @@ namespace ContactBookConsole.Models
         public string PostNumber { get ; set ; } = null!;
 
         public string City { get ; set ; } = null!;
+
+        public List<Contact> ContactList { get; set; } = null!;
+        public Contact AddContactToList { get; set; } = null!;
+
+        public void Add(Contact contactPerson)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
