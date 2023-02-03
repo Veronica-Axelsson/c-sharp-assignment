@@ -120,37 +120,63 @@ namespace ContactBookConsole.Services
             Console.Clear();
 
             ////Visa en specifik kontakt. Skriv personens förnamn:
-            Console.WriteLine($"Skriv personens förnamn: ");
+            Console.WriteLine($"\nSkriv personens förnamn: ");
             var searchFirstName = Console.ReadLine() ?? "";
-            //searchFirstName = searchFirstName.ToLower();
+            //var searchFirstName2 = searchFirstName.ToLower();
 
             //Letar efter kontakt, med hjälp av förnamn.
-            var findContact = contactsList.Find(x => x.FirstName.Contains(searchFirstName));
+            var findContact = contactsList.Find(x => x.FirstName.ToLower() == searchFirstName.ToLower());
+           
+
 
             if (findContact != null)
             {
-                Console.Clear();
+                if ( findContact.FirstName.ToLower() == searchFirstName.ToLower())
+                {
+                    ////Visa en specifik kontakt. Skriv personens Efternamn:
+                    Console.WriteLine($"\nSkriv personens Efternamn: ");
+                    var searchLastName = Console.ReadLine() ?? "";
+                    //var searchFirstName2 = searchFirstName.ToLower();
 
-                //Visar kontaktinfo.
-                Console.WriteLine($"Kontakt\r\n\r\n" +
-                     $"Förnamn: {findContact.FirstName} \r\n\r\n" +
-                     $"Efternamn: {findContact.LastName}\r\n\r\n" +
-                     $"E-postadress: {findContact.Email}\r\n\r\n" +
-                     $"Telefonnummer: {findContact.PhoneNumber}\r\n\r\n" +
-                     $"Adress: {findContact.StreetAddress}, {findContact.PostNumber} {findContact.City}\r\n\r\n");
+                    //Letar efter kontakt, med hjälp av förnamn.
+                    var findContact3 = contactsList.Find(x => x.LastName.ToLower() == searchFirstName.ToLower());
+                    if (findContact.LastName.ToLower() == searchLastName.ToLower())
+                    {
+                        Console.Clear();
+                        //Visar kontaktinfo.
+                        Console.WriteLine($"\nKontakt\r\n\r\n" +
+                             $"Förnamn: {findContact.FirstName} \r\n\r\n" +
+                             $"Efternamn: {findContact.LastName}\r\n\r\n" +
+                             $"E-postadress: {findContact.Email}\r\n\r\n" +
+                             $"Telefonnummer: {findContact.PhoneNumber}\r\n\r\n" +
+                             $"Adress: {findContact.StreetAddress}, {findContact.PostNumber} {findContact.City}\r\n\r\n");
 
-                Console.WriteLine("tryck på valfri tangent för att komma tillbaka till menyn.");
-                Console.Read();
+                        Console.WriteLine("tryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.Read();
+                    } else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\nKunde inte hitta personens efternamn.");
+                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.Read();
+                    }
+                } else
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nKunde inte hitta personens förnamn.");
+                    Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                    Console.Read();
+                }
+  
             }
             else
             {
                 Console.Clear();
-                Console.WriteLine("Kunde inte hitta kontakten.");
+                Console.WriteLine("\nKunde inte hitta kontakten.");
                 Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
                 Console.Read();
                 ShowMenu();
-            }
-         
+            } 
         }
 
         public void RemoveContactFromList()
@@ -158,61 +184,91 @@ namespace ContactBookConsole.Services
             Console.Clear();
 
             //Ta bort en specifik kontakt. Skriv personens förnamn:
-            Console.Write("Ta bort en kontakt! ");
-            Console.WriteLine($"Skriv personens förnamn: ");
+            Console.Write("\nTa bort en kontakt! ");
+            Console.WriteLine($"\nSkriv personens förnamn: ");
             var searchFirstName = Console.ReadLine() ?? "";
             string searchFirstNameToLower = searchFirstName.ToLower();
 
             //Letar efter kontakt, med hjälp av förnamn.
-
-            var findContact = contactsList.Find(x => x.FirstName.Contains(searchFirstName));
+            var findContact = contactsList.Find(x => x.FirstName.ToLower() == searchFirstName.ToLower());
 
             if (findContact != null)
             {
-                Console.Clear();
-
-                //Visar kontaktinfo.
-                Console.WriteLine($"Kontak: {findContact.FirstName} {findContact.LastName}");
-                Console.WriteLine("Vill du ta bort kontakten? Tryck y. För att avbryta tryck n");
-                var RemoveChoice = Console.ReadLine();
-
-                switch (RemoveChoice)
+                if (findContact.FirstName.ToLower() == searchFirstName.ToLower())
                 {
-                    case "y":
-                        // Ta bort kontakt
-                        try
-                        {
-                            contactsList.Remove(findContact);
-                            FileService.Save(FilePath, JsonConvert.SerializeObject(contactsList));
-                        }
-                        catch { }
+                    // Visa en specifik kontakt. Skriv personens Efternamn:
+                    Console.WriteLine($"\nSkriv personens Efternamn: ");
+                    var searchLastName = Console.ReadLine() ?? "";
 
-                        Console.WriteLine("Kontakten har tagits bort.");
-                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
-                        Console.Read();
-                        ShowMenu();
-                        break;
+                    // Letar efter kontakt, med hjälp av efternamn.
+                    var findContact3 = contactsList.Find(x => x.LastName.ToLower() == searchFirstName.ToLower());
 
-                    case "n":
-                        // Avbryta att ta bort kontakt
-                        Console.WriteLine("Ta bort kontakt avbryts.");
-                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
-                        Console.Read();
+                    if (findContact.LastName.ToLower() == searchLastName.ToLower())
+                    {
                         Console.Clear();
-                        ShowMenu();
-                        break;
- 
-                    default:
-                        
-                   
-                        Console.WriteLine("Kontakten kunde inte hittas.");
-                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                        // Visar kontaktinfo.
+                        Console.WriteLine($"\nKontakt: {findContact.FirstName} {findContact.LastName}");
+                        Console.WriteLine("\nVill du ta bort kontakten? Tryck y. För att avbryta tryck n");
+                        var RemoveChoice = Console.ReadLine();
 
-             
-                        //Console.Clear() ;
-                        //ShowMenu();
-                        break;
+                        switch (RemoveChoice)
+                        {
+                            case "y":
+                                // Ta bort kontakt
+                                try
+                                {
+                                    contactsList.Remove(findContact);
+                                    FileService.Save(FilePath, JsonConvert.SerializeObject(contactsList));
+                                }
+                                catch { }
+                                Console.Clear();
+                                Console.WriteLine("\nKontakten har tagits bort.");
+                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                Console.Read();
+                                ShowMenu();
+                                break;
+
+                            case "n":
+                                Console.Clear();
+                                // Avbryta att ta bort kontakt
+                                Console.WriteLine("\nTa bort kontakt avbryts.");
+                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                Console.Read();
+                                Console.Clear();
+                                ShowMenu();
+                                break;
+
+                            default:
+                                Console.WriteLine("\nKontakten kunde inte hittas.");
+                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                break;
+                        }
+                    } else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\nPersonens efternamn kunde inte hittas.");
+                        Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.Read();
+                        ShowMenu();
+                    }
+                } else
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nPersonens förnamn kunde inte hittas.");
+                    Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                    Console.Read();
+                    ShowMenu();
                 }
+
+                    Console.Clear();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("\nKontaktens förnamn kunde inte hittas.");
+                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                Console.Read();
+                ShowMenu();
             }
         }
     }

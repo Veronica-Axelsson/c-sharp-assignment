@@ -10,7 +10,9 @@ namespace ContactBookConsole.Models
     public class Contact : IContact
     {
         public string FirstName { get; set; } = null!;
+
         public string LastName { get ; set ; } = null!;
+
         public string Email { get ; set ; } = null!;
 
         public string PhoneNumber { get ; set ; } = null!;
@@ -22,6 +24,7 @@ namespace ContactBookConsole.Models
         public string City { get ; set ; } = null!;
 
         public List<Contact> ContactList { get; set; } = null!;
+
         public Contact AddContactToList { get; set; } = null!;
 
         public void Add(Contact contactPerson)
