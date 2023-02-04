@@ -9,5 +9,5 @@
         string StreetAddress { get; set; }
         string PostNumber { get; set; }
         string City { get; set; }
-}
+    }
 }

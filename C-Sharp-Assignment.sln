@@ -5,9 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactBookConsole", "ContactBookConsole\ContactBookConsole.csproj", "{42B2B268-5F86-47DB-86E7-184AD6F6B258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest_xUnit", "ConsoleAppTest_xUnit\ConsoleAppTest_xUnit.csproj", "{BBBE9DB3-AD66-47DB-822A-53E94E310BE0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest_MSTest", "ConsoleAppTest_MSTest\ConsoleAppTest_MSTest.csproj", "{2D28CB18-8BA4-4C1A-BA3F-31F729D19CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTest_xUnit", "ConsoleAppTest_xUnit\ConsoleAppTest_xUnit.csproj", "{BBBE9DB3-AD66-47DB-822A-53E94E310BE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{BBBE9DB3-AD66-47DB-822A-53E94E310BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBBE9DB3-AD66-47DB-822A-53E94E310BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBBE9DB3-AD66-47DB-822A-53E94E310BE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D28CB18-8BA4-4C1A-BA3F-31F729D19CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D28CB18-8BA4-4C1A-BA3F-31F729D19CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D28CB18-8BA4-4C1A-BA3F-31F729D19CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D28CB18-8BA4-4C1A-BA3F-31F729D19CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,5 @@
-//Du ska göra ett enkelt enhetstest som kontrollerar om du har fått in en kontaktperson i listan med hjälp någon av
-//följande xUnit/nUnit/MSTest (ett nytt projekt i samma solution).
+//Du ska göra ett enkelt enhetstest som kontrollerar om du har fått in en kontaktperson i listan med hjälp
+//någon av följande xUnit/nUnit/MSTest (ett nytt projekt i samma solution).
 
 using ContactBookConsole.Services;
 using Contact = ContactBookConsole.Models.Contact;

@@ -1,26 +1,12 @@
-﻿using ContactBookConsole.Interfaces;
-using ContactBookConsole.Models;
+﻿using ContactBookConsole.Models;
 using Newtonsoft.Json;
-using ContactBookConsole.Services;
-using System;
-using System.Net;
-using System.Xml.Linq;
-using System.IO;
-using System.Text.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
-using System.Xml.Serialization;
-using static System.Net.WebRequestMethods;
-using System.Collections.Generic;
 
 namespace ContactBookConsole.Services
 {
     internal class ContactService
     {
         private List<Contact> contactsList = new();
-        private readonly Contact contactPerson = new();  
-             
-        //private readonly FileService file = new();
-
+        private readonly Contact contactPerson = new();             
         public string FilePath { get; set; } = null!;
 
 
@@ -38,7 +24,6 @@ namespace ContactBookConsole.Services
                 }
             }
             catch { }
-            //---------------------------------
 
             //Menu
             Console.WriteLine("\nVälkommen till Adressboken\r\n\r\n" +
@@ -49,7 +34,6 @@ namespace ContactBookConsole.Services
                     "5. Avsluta programmet.\r\n\r\n" +
                     "Välj ett av alternativen ovan: ");
 
-            //Console.WriteLine("");
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -60,7 +44,7 @@ namespace ContactBookConsole.Services
                 case "4": RemoveContactFromList(); break;
                 case "5":
                     Console.Clear();
-                    Console.WriteLine("\nDu valde 5. Programmet avslutas. Tryck på valfri knapp för att fortsätta.");
+                    Console.WriteLine("\nDu valde 5. Programmet avslutas. Tryck på enter knapp för att fortsätta.");
                     System.Environment.Exit(0);
                     break;
                 default:
@@ -75,25 +59,25 @@ namespace ContactBookConsole.Services
             Console.Clear();
             Console.WriteLine("\nSkapa ny kontakt");
 
-            Console.Write("Förnamn: ");
+            Console.Write("\nFörnamn: ");
             contactPerson.FirstName = Console.ReadLine() ?? "";
 
-            Console.Write("Efternamn: ");
+            Console.Write("\nEfternamn: ");
             contactPerson.LastName = Console.ReadLine() ?? "";
 
-            Console.Write("E-post: ");
+            Console.Write("\nE-post: ");
             contactPerson.Email = Console.ReadLine() ?? "";
 
-            Console.Write("Telefonnummer: ");
+            Console.Write("\nTelefonnummer: ");
             contactPerson.PhoneNumber = Console.ReadLine() ?? "";
 
-            Console.Write("Gatuadress: ");
+            Console.Write("\nGatuadress: ");
             contactPerson.StreetAddress = Console.ReadLine() ?? "";
 
-            Console.Write("Postnummer: ");
+            Console.Write("\nPostnummer: ");
             contactPerson.PostNumber = Console.ReadLine() ?? "";
 
-            Console.Write("Stad: ");
+            Console.Write("\nOrt: ");
             contactPerson.City = Console.ReadLine() ?? "";
 
             contactsList.Add(contactPerson);
@@ -111,7 +95,7 @@ namespace ContactBookConsole.Services
                 Console.WriteLine($"Namn: {x.FirstName} {x.LastName}. E-mail: {x.Email}");
             }
 
-            Console.WriteLine("\nTryck på en valfri tangent för att komma tillbaka till huvudmenyn");
+            Console.WriteLine("\nTryck på enter tangent för att komma tillbaka till huvudmenyn");
             Console.Read();
         }
 
@@ -127,19 +111,17 @@ namespace ContactBookConsole.Services
             //Letar efter kontakt, med hjälp av förnamn.
             var findContact = contactsList.Find(x => x.FirstName.ToLower() == searchFirstName.ToLower());
            
-
-
             if (findContact != null)
             {
                 if ( findContact.FirstName.ToLower() == searchFirstName.ToLower())
                 {
-                    ////Visa en specifik kontakt. Skriv personens Efternamn:
+                    // Skriv personens Efternamn:
                     Console.WriteLine($"\nSkriv personens Efternamn: ");
                     var searchLastName = Console.ReadLine() ?? "";
-                    //var searchFirstName2 = searchFirstName.ToLower();
 
-                    //Letar efter kontakt, med hjälp av förnamn.
+                    //Letar efter kontakt, med hjälp av efternamn.
                     var findContact3 = contactsList.Find(x => x.LastName.ToLower() == searchFirstName.ToLower());
+                    
                     if (findContact.LastName.ToLower() == searchLastName.ToLower())
                     {
                         Console.Clear();
@@ -151,29 +133,28 @@ namespace ContactBookConsole.Services
                              $"Telefonnummer: {findContact.PhoneNumber}\r\n\r\n" +
                              $"Adress: {findContact.StreetAddress}, {findContact.PostNumber} {findContact.City}\r\n\r\n");
 
-                        Console.WriteLine("tryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.WriteLine("Tryck på enter tangent för att komma tillbaka till menyn.");
                         Console.Read();
                     } else
                     {
                         Console.Clear();
                         Console.WriteLine("\nKunde inte hitta personens efternamn.");
-                        Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.WriteLine("Tryck på enter tangent för att komma tillbaka till menyn.");
                         Console.Read();
                     }
                 } else
                 {
                     Console.Clear();
                     Console.WriteLine("\nKunde inte hitta personens förnamn.");
-                    Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                    Console.WriteLine("Tryck på enter tangent för att komma tillbaka till menyn.");
                     Console.Read();
                 }
-  
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine("\nKunde inte hitta kontakten.");
-                Console.WriteLine("Tryck på valfri tangent för att komma tillbaka till menyn.");
+                Console.WriteLine("Tryck på enter tangent för att komma tillbaka till menyn.");
                 Console.Read();
                 ShowMenu();
             } 
@@ -196,7 +177,7 @@ namespace ContactBookConsole.Services
             {
                 if (findContact.FirstName.ToLower() == searchFirstName.ToLower())
                 {
-                    // Visa en specifik kontakt. Skriv personens Efternamn:
+                    // Skriv personens efternamn:
                     Console.WriteLine($"\nSkriv personens Efternamn: ");
                     var searchLastName = Console.ReadLine() ?? "";
 
@@ -223,7 +204,7 @@ namespace ContactBookConsole.Services
                                 catch { }
                                 Console.Clear();
                                 Console.WriteLine("\nKontakten har tagits bort.");
-                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
                                 Console.Read();
                                 ShowMenu();
                                 break;
@@ -232,7 +213,7 @@ namespace ContactBookConsole.Services
                                 Console.Clear();
                                 // Avbryta att ta bort kontakt
                                 Console.WriteLine("\nTa bort kontakt avbryts.");
-                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
                                 Console.Read();
                                 Console.Clear();
                                 ShowMenu();
@@ -240,14 +221,16 @@ namespace ContactBookConsole.Services
 
                             default:
                                 Console.WriteLine("\nKontakten kunde inte hittas.");
-                                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                                Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
+                                Console.Clear();
+                                ShowMenu();
                                 break;
                         }
                     } else
                     {
                         Console.Clear();
                         Console.WriteLine("\nPersonens efternamn kunde inte hittas.");
-                        Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                        Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
                         Console.Read();
                         ShowMenu();
                     }
@@ -255,7 +238,7 @@ namespace ContactBookConsole.Services
                 {
                     Console.Clear();
                     Console.WriteLine("\nPersonens förnamn kunde inte hittas.");
-                    Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                    Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
                     Console.Read();
                     ShowMenu();
                 }
@@ -266,7 +249,7 @@ namespace ContactBookConsole.Services
             {
                 Console.Clear();
                 Console.WriteLine("\nKontaktens förnamn kunde inte hittas.");
-                Console.WriteLine("\nTryck på valfri tangent för att komma tillbaka till menyn.");
+                Console.WriteLine("\nTryck på Enter tangent för att komma tillbaka till menyn.");
                 Console.Read();
                 ShowMenu();
             }
